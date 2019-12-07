@@ -10,14 +10,15 @@ before_install:
 
 # Display the SHA-256 checksum of the file
 before_deploy:
-  - sha256sum grep-*.zip
+  - mv grep-*.zip grep-${TRAVIS_TAG}.zip
+  - sha256sum grep-${TRAVIS_TAG}.zip
 
 deploy:
   provider: releases
   api_key:
     secure: wkyqDGXMdBq6aDzYh6sPlTcmBfOLk44DAx7icsXQ8Gyi+JNja249+gdnTyKk/BOz/RO3JYJy3zknKq1mdoBUJoIPhEppvh6iwd7GI5Xq1h6HnKJ+4ZsUKZOGi+E+obDR9Bk8H/9m32SXDxI+d1l7yhCkozpYy4eej557XFsvE3Yo8igoLEY8oDth8lBpNhrDvQlKJR0rZirnPxwIMAO1TVviIqWeLo3glkx5SnG/oSs70snp67z5mCJKMQbVJKV23lTq5ZeSf2yK2ewVcZLTBJGCqYc7oBi1BLcxAa49OgTGSHShgRcZKwMimMcYY4f++ljHc6yo4pvwJxQXyNCoEmIskNsJ+e9O3aQVnJ0RivwGqz8CFv6QPIvCGd1evOk1bWzoRESYS/v31I0y0s6mOUjMCGAKpGGBFR3bTQWTfXlm6ce6UNDBeHMk96iwg8pdumjJ63adXMf0ipD5c56fH5cAeodJAxjZC7I+1Im8WoaivYvaflmSs4qSspOaV5uCYvz5PAHhgVyREzPiwwUT9nlZ9Mgi4Ayh/sSvl19vPUSTdtOKkJ/o76lIjqchN0oS4P29RUNkL25BuZi7ZnC3ytvp8mk9AXNBLeoPiA90xAW7Qc/0mm7VKg8qTgfOmNMbvrXBK12WmvDC+OvEYfPq3ZJKXr8ReHc4ICKfxEXvn84=
-  file_glob: true
-  file: "grep-*.zip"
+  # file_glob: true
+  file: "grep-${TRAVIS_TAG}.zip"
   skip_cleanup: true
   on:
     tags: true
