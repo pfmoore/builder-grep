@@ -7,14 +7,10 @@ wget http://ftp.gnu.org/gnu/grep/grep-${GREP_VER}.tar.xz
 tar xf grep-${GREP_VER}.tar.xz
 cd grep-${GREP_VER}
 
-# Wildcard expansion
-echo "int _dowildcard = -1;" >wild.c
-x86_64-w64-mingw32-gcc -c wild.c
-
 # Static to avoid depending on libpcre.dll at runtime
 # Also needs -DPCRE_STATIC to tell the PCRE headers we are doing a static
 # link.
-mingw64-configure CFLAGS="-DPCRE_STATIC" LIBS="$(pwd)/wild.o" LDFLAGS="-static" --disable-nls
+mingw64-configure CFLAGS="-DPCRE_STATIC" LIBS="/usr/x86_64-w64-mingw32/sys-root/mingw/lib/CRT_glob.o" LDFLAGS="-static" --disable-nls
 
 # Hack around error in gnulib-tests (which doesn't matter)
 mv gnulib-tests gnulib-tests#
